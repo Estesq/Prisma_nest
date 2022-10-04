@@ -1,5 +1,5 @@
 import {Injectable} from '@nestjs/common'
-import { PrismaService } from './prisma.service'
+import { PrismaService } from '../prisma.service'
 import {CreateUserInput, DeleteUserInput, UpdateUserInput, User} from "src/graphql"
 
 
@@ -40,7 +40,7 @@ export class UserService{
             return "User updated successfully" 
         }
         catch(error){
-            return error
+            return "Some Error occured"
         }
     }
 

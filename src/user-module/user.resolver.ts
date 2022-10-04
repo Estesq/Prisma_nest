@@ -1,10 +1,9 @@
 import {Args, Mutation, Query, Resolver} from '@nestjs/graphql'
 import { UserService } from './user.service'
-import {CreateUserInput, DeleteUserInput, UpdateUserInput} from 'src/graphql'
+import {CreateUserInput, DeleteUserInput, UpdateUserInput} from '../graphql'
 
 @Resolver()
 export class UserResolver{
-
     constructor(private readonly user:UserService){}
 
     @Query('users')
@@ -24,7 +23,7 @@ export class UserResolver{
 
 
     @Mutation('deleteUser')
-    async DeleteUserInput(@Args('data')input: DeleteUserInput){
+    async deleteUser(@Args('data')input: DeleteUserInput){
         return this.user.deleteUser(input)
     }
     
