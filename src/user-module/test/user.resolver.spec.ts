@@ -3,7 +3,6 @@ import { UpdateUserInput, DeleteUserInput, User, CreateUserInput } from "../../g
 import { getHeapStatistics } from "v8";
 import { UserResolver } from "../user.resolver"
 import { UserService } from "../user.service";
-import { users, user } from './stubs/user.stub';;
 
 jest.mock("../user.service")
 
@@ -23,42 +22,6 @@ describe("User Resolver",()=>{
         jest.clearAllMocks();
     })
 
-    describe("get users tests", () => {
-        describe('getUser is called', () => {
-
-            let user:User[];
-            beforeEach(async () => {
-                user = await userResolver.users()
-            })
-
-            test('calling user service', () => {
-                expect(userService.getUsers).toBeCalledWith()
-            })
-            test('user serivce output', () => {
-                expect(typeof userService.getUsers()).toBe(typeof [User])
-            })
-
-         })
-    });
-
-    describe("create tests",()=>{
-        describe("create user is called",()=>{
-            let res: User;
-            let input: CreateUserInput
-            beforeEach(async()=>{
-                input=user()
-                res = await userResolver.createUser(input)
-            })
-
-            test("checking service input type",()=>{
-                expect(userService.createUser).toBeCalledWith(input)
-            })
-
-            test("checking output",()=>{
-                expect(res).toEqual(input)
-            })
-        })
-    })
 
     describe("update tests",()=>{
         describe("update user is called",()=>{
@@ -82,24 +45,4 @@ describe("User Resolver",()=>{
         })
     })
 
-    describe("delete tests",()=>{
-        describe("delete user is called",()=>{
-            let res: String;
-            let input: DeleteUserInput
-            beforeEach(async()=>{
-                input={
-                    id: "1",
-                }
-                res = await userResolver.deleteUser(input)
-            })
-
-            test("checking service input type",()=>{
-                expect(userService.deleteUser).toBeCalledWith(input)
-            })
-
-            test("checking output",()=>{
-                expect(res).toEqual("User deleted successfully")
-            })
-        })
-    })
 })
